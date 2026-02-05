@@ -16,15 +16,12 @@ const PORT = +process.env.PORT || 3001;
 //       : "postgresql://mooks2022:mookster21@localhost:5432/react_jobly";
 // }
 
+
 function getDatabaseUri() {
-  if (process.env.NODE_ENV === "test") {
-    return "postgresql://mooks2022:mookster21@localhost:5432/react_jobly_test";
-  }
-
-  return process.env.DATABASE_URL
-      || "postgresql://mooks2022:mookster21@localhost:5432/react_jobly";
+  return (process.env.NODE_ENV === "test")
+    ? "postgresql://mooks2022:mookster21@localhost:5432/react_jobly_test"
+    : (process.env.DATABASE_URL || "postgresql://mooks2022:mookster21@localhost:5432/react_jobly");
 }
-
 
 
 // Speed up bcrypt during tests, since the algorithm safety isn't being tested
