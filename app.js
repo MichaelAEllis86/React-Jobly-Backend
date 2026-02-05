@@ -15,9 +15,17 @@ const jobsRoutes = require("./routes/jobs");
 
 const morgan = require("morgan");
 
+const ALLOWED_ORIGINS = [
+  "http://localhost:5173",
+  process.env.FRONTEND_URL, // e.g. https://your-frontend.onrender.com
+].filter(Boolean);
+
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ALLOWED_ORIGINS,
+  credentials: true,
+}));
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(authenticateJWT);
